@@ -9,7 +9,7 @@
         </p>
         <img [src]="movie.poster" alt="Movie poster" />
       </div>
-      <div class="back">
+      <div class="back" appWordcount>
         <p>
           {{ movie.description | emphasize: "moon" }}
         </p>
