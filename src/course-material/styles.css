@@ -1,0 +1,122 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  color: #333333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+/******************************** Video list component *************************************/
+
+.query {
+  border-radius: 4px;
+  box-shadow: 3px 3px 4px #888888;
+  background: linear-gradient(to bottom right, #f2f2f2, #ededed);
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  width: 320px;
+}
+
+.query:focus {
+  outline: none;
+}
+
+.query.ng-invalid.ng-dirty {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  margin-left: 10px;
+}
+
+/************************ VIDEO Component *************************/
+
+.video {
+  /* background: linear-gradient(to bottom right, #c2c2d2, #232343); */
+  box-shadow: 7px 7px 3px #888888;
+  border: 1px solid #e2e2e2;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.video p:first-of-type {
+  font-weight: bold;
+}
+.video img {
+  max-height: 240px;
+  max-width: 300px;
+}
+
+.video-container {
+  float: left;
+  margin: 10px;
+}
+/* flip the pane when hovered */
+.video-container:hover .video,
+.video-container.hover .video {
+  transform: rotateY(180deg);
+  box-shadow: -7px 7px 3px #888888;
+}
+
+.title {
+  height: 20px;
+  overflow: hidden;
+}
+
+.video-container,
+.front,
+.back,
+.video {
+  width: 180px;
+  height: 310px;
+}
+
+/* flip speed goes here */
+.video {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front,
+.back {
+  backface-visibility: hidden;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+  background: linear-gradient(to bottom, #ffffff, #bbbbbb);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
