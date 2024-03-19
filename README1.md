@@ -7,10 +7,11 @@ Run the following commands to get started:
 1. `ng new --routing angular-intro-next`
 1. Choose css for styling and no for SSR
 1. `cd angular-intro-next`
-1. `code .`
-1. Move `src/course-material/extensions.json` to `.vscode` folder
-1. Move `src/course-material/styles.css` to `src/` folder
-3. Install recommended extensions (Angular language service, Prettier, ESLint)
-4. `npm start`
+2. `npm i zod`
+3. `code .`
+4. Move `src/course-material/extensions.json` to `.vscode` folder
+5. Move `src/course-material/styles.css` to `src/` folder
+6. Install recommended extensions (Angular language service, Prettier, ESLint)
+7. `npm start`
 
 Verify that application is running on http://localhost:4200/
