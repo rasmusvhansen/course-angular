@@ -2,22 +2,33 @@ import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { MovieComponent } from '../movie/movie.component';
 import { MovieService } from '../movie.service';
 import { Movie } from '../../course-material/types';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, debounceTime, filter, map, switchMap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+
+const rickLidator: ValidatorFn = (control: AbstractControl<string>) =>
+  control.value.match(/(rick)|(morty)|(astley)/gi)
+    ? { rickLidator: true }
+    : null;
 
 @Component({
   selector: 'app-movie-search',
   standalone: true,
-  imports: [MovieComponent, ReactiveFormsModule, AsyncPipe],
+  imports: [MovieComponent, ReactiveFormsModule, AsyncPipe, JsonPipe],
   templateUrl: './movie-search.component.html',
   styleUrl: './movie-search.component.css',
 })
 export class MovieSearchComponent implements OnInit {
   destroyRef = inject(DestroyRef);
-  query = new FormControl('');
+  query = new FormControl('', [rickLidator, Validators.maxLength(12)]);
   movies$!: Observable<Movie[]>;
 
   constructor(
@@ -30,7 +41,7 @@ export class MovieSearchComponent implements OnInit {
     const query$ = this.query.valueChanges.pipe(
       debounceTime(200),
       filter(Boolean),
-      filter((q) => q.length > 1),
+      filter((q) => this.query.valid && q.length > 1),
       takeUntilDestroyed(this.destroyRef),
     );
 
