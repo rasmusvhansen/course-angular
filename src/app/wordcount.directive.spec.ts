@@ -6,15 +6,24 @@ import { By } from '@angular/platform-browser';
 describe('Word count directive', () => {
   let directive: WordcountDirective;
 
-  beforeEach(() => {});
+  const element: ElementRef = {
+    nativeElement: { innerText: 'One two three' },
+  };
+  beforeEach(() => {
+    directive = new WordcountDirective(element);
+    directive.ngAfterViewInit();
+  });
 
-  it('should write the number of words in the title', () => {});
+  it('should write the number of words in the title', () => {
+    expect(element.nativeElement.title).toBe('Contains 3 word(s)');
+  });
 });
 
 /* ------------------- Using Angular Testbed --------------- */
 
 @Component({
   template: ` <div appWordcount>This div has many words</div> `,
+  imports: [WordcountDirective],
   standalone: true,
 })
 class TestWordcountDirectiveComponent {}
@@ -22,18 +31,17 @@ class TestWordcountDirectiveComponent {}
 describe('Word count directive with testbed', () => {
   let fixture: ComponentFixture<TestWordcountDirectiveComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [WordcountDirective, TestWordcountDirectiveComponent],
     }).compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(TestWordcountDirectiveComponent);
     fixture.detectChanges();
   });
 
   it('should count the words in the element it is attached to', () => {
     // use fixture.debugElement.query(By.css('div')) to get reference to element
+    const element = fixture.debugElement.query(By.css('div'));
+    expect(element.nativeElement.title).toBe('Contains 5 word(s)');
   });
 });
