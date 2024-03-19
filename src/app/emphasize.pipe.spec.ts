@@ -1,8 +1,11 @@
 import { EmphasizePipe } from './emphasize.pipe';
 
-describe('EmphasizePipe', () => {
-  it('create an instance', () => {
-    const pipe = new EmphasizePipe();
-    expect(pipe).toBeTruthy();
-  });
+describe('Emphasize pipe', () => {
+  beforeEach(() => {});
+
+  it('should emphasize "shark" as default', () => {});
+
+  it('should emphasize given word', () => {});
+
+  it('should be case insensitive', () => {});
 });

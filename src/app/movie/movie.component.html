@@ -1,19 +1,21 @@
-<div class="video-container">
-  <a [href]="movie.link" target="_blank" rel="noreferrer">
-    <div class="video">
-      <div class="front">
-        <p class="title">
-          {{ movie.title | emphasize }} [{{ movie.releaseYear }}] [{{
-            movie.rating | number: "1.1-1"
-          }}]
-        </p>
-        <img [src]="movie.poster" alt="Movie poster" />
+@if (movie) {
+  <div class="video-container">
+    <a [href]="movie.link" target="_blank" rel="noreferrer">
+      <div class="video">
+        <div class="front">
+          <p class="title">
+            {{ movie.title | emphasize }} [{{ movie.releaseYear }}] [{{
+              movie.rating | number: "1.1-1"
+            }}]
+          </p>
+          <img [src]="movie.poster" alt="Movie poster" />
+        </div>
+        <div class="back" appWordcount>
+          <p>
+            {{ movie.description | emphasize: "moon" }}
+          </p>
+        </div>
       </div>
-      <div class="back" appWordcount>
-        <p>
-          {{ movie.description | emphasize: "moon" }}
-        </p>
-      </div>
-    </div>
-  </a>
-</div>
+    </a>
+  </div>
+}
