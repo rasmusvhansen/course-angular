@@ -3,7 +3,9 @@
     <div class="video">
       <div class="front">
         <p class="title">
-          {{ movie.title }} [{{ movie.releaseYear }}] [{{ movie.rating }}]
+          {{ movie.title }} [{{ movie.releaseYear }}] [{{
+            movie.rating | number: "1.1-1"
+          }}]
         </p>
         <img [src]="movie.poster" alt="Movie poster" />
       </div>

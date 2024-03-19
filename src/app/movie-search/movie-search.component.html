@@ -1,3 +1,12 @@
-@for (movie of movies; track movie.id) {
+<div>
+  <input
+    [formControl]="query"
+    placeholder="search"
+    type="search"
+    class="query"
+  />
+</div>
+
+@for (movie of movies$ | async; track movie.id) {
   <app-movie [movie]="movie"></app-movie>
 }
