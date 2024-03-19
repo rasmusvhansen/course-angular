@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { movies } from '../../course-material/dummydata';
+import { Component, OnInit } from '@angular/core';
 import { MovieComponent } from '../movie/movie.component';
+import { MovieService } from '../movie.service';
+import { Movie } from '../../course-material/types';
 
 @Component({
   selector: 'app-movie-search',
@@ -9,6 +10,12 @@ import { MovieComponent } from '../movie/movie.component';
   templateUrl: './movie-search.component.html',
   styleUrl: './movie-search.component.css',
 })
-export class MovieSearchComponent {
-  movies = movies;
+export class MovieSearchComponent implements OnInit {
+  movies!: Movie[];
+
+  constructor(private readonly movieService: MovieService) {}
+
+  ngOnInit(): void {
+    this.movies = this.movieService.search('not used');
+  }
 }
