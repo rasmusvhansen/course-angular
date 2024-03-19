@@ -15,6 +15,7 @@ describe('Word count directive', () => {
 
 @Component({
   template: ` <div appWordcount>This div has many words</div> `,
+  imports: [WordcountDirective],
   standalone: true,
 })
 class TestWordcountDirectiveComponent {}
@@ -22,13 +23,10 @@ class TestWordcountDirectiveComponent {}
 describe('Word count directive with testbed', () => {
   let fixture: ComponentFixture<TestWordcountDirectiveComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [WordcountDirective, TestWordcountDirectiveComponent],
     }).compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(TestWordcountDirectiveComponent);
     fixture.detectChanges();
   });
