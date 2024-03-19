@@ -1,20 +1,2 @@
-@for (movie of movies; track movie.id) {
-<div class="video-container">
-  <a [href]="movie.link" target="_blank" rel="noreferrer">
-    <div class="video">
-      <div class="front">
-        <p class="title">
-          {{ movie.title }} [{{ movie.releaseYear }}] [{{ movie.rating }}]
-        </p>
-        <img [src]="movie.poster" alt="Movie poster" />
-      </div>
-      <div class="back">
-        <p>
-          {{ movie.description }}
-        </p>
-      </div>
-    </div>
-  </a>
-</div>
-}
+<app-movie-search></app-movie-search>
 <router-outlet />
