@@ -8,8 +8,9 @@ Run the following commands to get started:
 1. Choose css for styling and no for SSR
 1. `cd angular-intro-next`
 1. `code .`
-1. Move `src/course-material/extensions.json` to .vscode folder
-1. Install recommended extensions (Angular language service, Prettier, ESLint)
-1. `npm start`
+1. Move `src/course-material/extensions.json` to `.vscode` folder
+1. Move `src/course-material/styles.css` to `src/` folder
+3. Install recommended extensions (Angular language service, Prettier, ESLint)
+4. `npm start`
 
 Verify that application is running on http://localhost:4200/
