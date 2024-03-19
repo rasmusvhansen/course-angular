@@ -4,8 +4,9 @@ import { MovieService } from '../movie.service';
 import { Movie } from '../../course-material/types';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable, debounceTime, filter, switchMap } from 'rxjs';
+import { Observable, debounceTime, filter, map, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-search',
@@ -19,7 +20,11 @@ export class MovieSearchComponent implements OnInit {
   query = new FormControl('');
   movies$!: Observable<Movie[]>;
 
-  constructor(private readonly movieService: MovieService) {}
+  constructor(
+    private readonly movieService: MovieService,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+  ) {}
 
   ngOnInit(): void {
     const query$ = this.query.valueChanges.pipe(
@@ -29,6 +34,15 @@ export class MovieSearchComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef),
     );
 
-    this.movies$ = query$.pipe(switchMap((q) => this.movieService.search(q)));
+    query$.subscribe((q) => this.router.navigate(['movies', q]));
+
+    const routeSearch$ = this.route.paramMap.pipe(
+      map((param) => param.get('query')),
+      filter(Boolean),
+    );
+
+    this.movies$ = routeSearch$.pipe(
+      switchMap((q) => this.movieService.search(q)),
+    );
   }
 }
