@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Movie, TMDBMovie, TMDBResult } from '../course-material/types';
+import {
+  Movie,
+  TMDBMovie,
+  TMDBResult,
+  TMDBResultSchema,
+} from '../course-material/types';
 import {
   getLink,
   getPosterPath,
@@ -15,13 +20,12 @@ export class MovieService {
   constructor(private readonly httpClient: HttpClient) {}
 
   search(query: string): Observable<Movie[]> {
-    return this.httpClient
-      .get<TMDBResult>(getQueryString(query))
-      .pipe(
-        map((result) =>
-          result.results.filter((r) => !!r.poster_path).map(toMovie),
-        ),
-      );
+    return this.httpClient.get<TMDBResult>(getQueryString(query)).pipe(
+      map((result) => {
+        const parsed = TMDBResultSchema.parse(result);
+        return parsed.results.filter((r) => !!r.poster_path).map(toMovie);
+      }),
+    );
   }
 }
 

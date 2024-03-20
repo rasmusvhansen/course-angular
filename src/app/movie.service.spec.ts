@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Movie, TMDBResult } from '../course-material/types';
 import { MovieService } from './movie.service';
+import { of } from 'rxjs';
 
 const tmdbResult: TMDBResult = {
   results: [
@@ -18,7 +19,14 @@ const tmdbResult: TMDBResult = {
   total_results: 1,
 };
 
-const videos: Movie[] = [
+const emptyTmdbResult: TMDBResult = {
+  results: [],
+  page: 1,
+  total_pages: 1,
+  total_results: 0,
+};
+
+const expectedVideos: Movie[] = [
   {
     id: 205321,
     title: 'Sharknado',
@@ -38,11 +46,24 @@ describe('MovieService', () => {
     service = new MovieService(httpClient);
   });
 
-  it('should return empty list on no results', () => {});
-
-  it('should call youtube endpoint with query and age', () => {
-    // use calls.mostRecent.args[0] on the httpClient.get spy to retrieve the arguments
+  it('should return empty list on no results', () => {
+    httpClient.get.and.returnValue(of(emptyTmdbResult));
+    service.search('grus').subscribe((movies) => {
+      expect(movies.length).toBe(0);
+    });
   });
 
-  it('should map youtube result to list of videos', () => {});
+  it('should call tmdb api with query', () => {
+    // use calls.mostRecent.args[0] on the httpClient.get spy to retrieve the arguments
+    httpClient.get.and.returnValue(of(emptyTmdbResult));
+    service.search('grus').subscribe();
+    expect(httpClient.get.calls.mostRecent().args[0]).toContain('query=grus');
+  });
+
+  it('should map tmdb result to list of videos', () => {
+    httpClient.get.and.returnValue(of(tmdbResult));
+    service.search('grus').subscribe((movies) => {
+      expect(movies).toEqual(expectedVideos);
+    });
+  });
 });

@@ -29,7 +29,7 @@ const TMDBMovieSchema = z.object({
   poster_path: z.string().nullable(),
 });
 
-const TMDBResultSchema = z.object({
+export const TMDBResultSchema = z.object({
   page: z.number(),
   total_pages: z.number(),
   total_results: z.number(),
