@@ -18,6 +18,13 @@ const tmdbResult: TMDBResult = {
   total_results: 1,
 };
 
+const emptyTmdbResult: TMDBResult = {
+  results: [],
+  page: 1,
+  total_pages: 1,
+  total_results: 0,
+};
+
 const expectedVideos: Movie[] = [
   {
     id: 205321,
