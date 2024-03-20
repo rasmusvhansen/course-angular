@@ -40,9 +40,9 @@ describe('MovieService', () => {
 
   it('should return empty list on no results', () => {});
 
-  it('should call youtube endpoint with query and age', () => {
+  it('should call tmdb api with query', () => {
     // use calls.mostRecent.args[0] on the httpClient.get spy to retrieve the arguments
   });
 
-  it('should map youtube result to list of videos', () => {});
+  it('should map tmdb result to list of videos', () => {});
 });
