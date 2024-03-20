@@ -3,7 +3,7 @@
 Run the following commands to get started:
 
 1. `cd ..` (to go to parent directory of `angular-intro-next`)
-1. `npm install -g @angular/cli`
+1. `npm install -g @angular/cli@latest`
 1. `ng new --routing angular-intro-next`
 1. Choose css for styling and no for SSR
 1. `cd angular-intro-next`
