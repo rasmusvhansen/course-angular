@@ -18,7 +18,7 @@ const tmdbResult: TMDBResult = {
   total_results: 1,
 };
 
-const videos: Movie[] = [
+const expectedVideos: Movie[] = [
   {
     id: 205321,
     title: 'Sharknado',
